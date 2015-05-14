@@ -2,7 +2,6 @@ package com.wx.clearedittext;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 /**
  * 只是简单的添加了一个编辑框
  * @author WangXiang

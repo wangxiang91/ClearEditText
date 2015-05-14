@@ -9,8 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
-
-  
 /**
  * 重写onTouchEvent实现删除一行
  * @author WangXiang
