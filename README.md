@@ -1,2 +1,2 @@
 # ClearEditText
-ClearEditText 
+ClearEditText 给android中EditText增加了删除一行的功能
