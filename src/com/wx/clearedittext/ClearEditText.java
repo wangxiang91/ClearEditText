@@ -56,12 +56,12 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
             if (getCompoundDrawables()[2] != null) {
             	//只是计算了X轴对于暂时没想到好办法计算出Y轴坐标
                 boolean x = event.getX() > getWidth() - getTotalPaddingRight() && (event.getX() < ((getWidth() - getPaddingRight())));
-                if (x) {  
-                    this.setText("");  
+                if (x) {
+                    this.setText("");
                 }else{
                    	performClick();
                 }
-            }  
+            }
         }
         return true;  
 	}
