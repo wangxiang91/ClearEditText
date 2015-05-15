@@ -1,14 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wx="http://schemas.android.com/apk/res/com.wx.clearedittext"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.wx.clearedittext.MainActivity" >
-    
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
     <com.wx.clearedittext.ClearEditText
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
-</RelativeLayout>
+        android:layout_height="48dp"
+        android:drawablePadding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        wx:clear="@drawable/edittext_clear"
+        wx:def="@drawable/login_user"
+        wx:enter="@drawable/login_user_hightlighted" />
+
+    <com.wx.clearedittext.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:drawablePadding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        wx:clear="@drawable/edittext_clear"
+        wx:def="@drawable/login_key"
+        wx:enter="@drawable/login_key_hightlighted" />
+
+</LinearLayout>

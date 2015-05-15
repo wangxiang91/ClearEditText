@@ -1,6 +1,7 @@
 package com.wx.clearedittext;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +15,7 @@ import android.widget.EditText;
  * @author WangXiang
  */
 public class ClearEditText extends EditText implements OnFocusChangeListener, TextWatcher {   
-    private Drawable mClearDrawable;   
+    private Drawable mClear,mEnter,mDef;   
     private boolean hasFoucs;  
     public ClearEditText(Context context) {   
         this(context, null);   
@@ -24,16 +25,23 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
     }   
       
     public ClearEditText(Context context, AttributeSet attrs, int defStyle) {  
-        super(context, attrs, defStyle);  
+        super(context, attrs, defStyle);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ClearEditText);  
+        mClear = a.getDrawable(R.styleable.ClearEditText_clear);
+        mDef = a.getDrawable(R.styleable.ClearEditText_def);
+        mEnter = a.getDrawable(R.styleable.ClearEditText_enter);
+        a.recycle();
         init();
     }  
     private void init() {   
         //获取EditText的DrawableRight,假如没有设置我们就使用默认的图片  
-        mClearDrawable = getCompoundDrawables()[2];   
-        if (mClearDrawable == null) {   
-            mClearDrawable = getResources().getDrawable(R.drawable.edittext_clear);   
-        }   
-        mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());   
+        if (mClear == null) {
+        	mClear = getResources().getDrawable(R.drawable.edittext_clear);   
+        }
+        mClear.setBounds(0, 0, mClear.getIntrinsicWidth(), mClear.getIntrinsicHeight());
+        mDef.setBounds(0, 0, mDef.getIntrinsicWidth(), mDef.getIntrinsicHeight());
+        mEnter.setBounds(0, 0, mEnter.getIntrinsicWidth(), mEnter.getIntrinsicHeight());
+        setCompoundDrawables(mDef,getCompoundDrawables()[1], mClear, getCompoundDrawables()[3]);
         setClearIconVisible(false);
         setOnFocusChangeListener(this);
         addTextChangedListener(this);
@@ -67,15 +75,18 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
             setClearIconVisible(getText().length() > 0);   
         } else {   
             setClearIconVisible(false);   
-        }   
+        }
     }   
     /**
      * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去 
      * @param visible 
      */
-    protected void setClearIconVisible(boolean visible) {   
-        Drawable right = visible ? mClearDrawable : null;   
-        setCompoundDrawables(getCompoundDrawables()[0],getCompoundDrawables()[1], right, getCompoundDrawables()[3]);   
+    protected void setClearIconVisible(boolean visible) {
+    	if(visible){
+    		setCompoundDrawables(mEnter,getCompoundDrawables()[1], mClear, getCompoundDrawables()[3]);
+    	}else{
+    		setCompoundDrawables(mDef,getCompoundDrawables()[1], null, getCompoundDrawables()[3]);
+    	}
     }   
     /**
      * 当输入框里面内容发生变化的时候回调的方法 
@@ -86,8 +97,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener, Te
         }
     }   
     public void beforeTextChanged(CharSequence s, int start, int count,int after) {   
-           
     }   
     public void afterTextChanged(Editable s) {   
-    }   
-}  
+    }
+}
